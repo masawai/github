@@ -12,26 +12,51 @@ provider "github" {
   token = var.github_token
 }
 
-
-resource "github_repository" "github" {
-  name = "github"
-
+# github
+resource "github_repository" "github_repository" {
+  name       = "github"
   visibility = "public"
 }
 
-resource "github_branch_protection" "example" {
-  repository_id  = github_repository.github.node_id
+resource "github_branch_protection" "github_protection" {
+  repository_id  = github_repository.github_repository.node_id
   pattern        = "main"
   enforce_admins = true
-
-  # required_pull_request_reviews {
-  #   dismiss_stale_reviews = true
-  # require_code_owner_reviews = true
-  # required_approving_review_count = 2
-  # }
-
 }
 
-output "github" {
-  value = github_repository.github.git_clone_url
+# linebot
+resource "github_repository" "linebot_repository" {
+  name       = "linebot"
+  visibility = "public"
 }
+
+resource "github_branch_protection" "linebot_protection" {
+  repository_id  = github_repository.linebot_repository.node_id
+  pattern        = "main"
+  enforce_admins = true
+}
+
+# masawai
+resource "github_repository" "masawai_repository" {
+  name       = "masawai"
+  visibility = "public"
+}
+
+resource "github_branch_protection" "masawai_protection" {
+  repository_id  = github_repository.masawai_repository.node_id
+  pattern        = "main"
+  enforce_admins = true
+}
+
+# jumble
+resource "github_repository" "jumble_repository" {
+  name       = "jumble"
+  visibility = "public"
+}
+
+resource "github_branch_protection" "jumble_protection" {
+  repository_id  = github_repository.jumble_repository.node_id
+  pattern        = "main"
+  enforce_admins = true
+}
+
