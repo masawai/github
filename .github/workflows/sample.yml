@@ -10,6 +10,8 @@ jobs:
   terraform:
     name: "Terraform"
     runs-on: ubuntu-latest
+    env:
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -18,10 +20,12 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.5.3
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Terraform Format and Validate
         run: |
           terraform fmt -check
+          terraform init
           terraform validate
 
       - name: Terraform Plan
