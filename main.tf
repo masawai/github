@@ -69,3 +69,16 @@ resource "github_branch_protection" "jumble_protection" {
   enforce_admins = true
 }
 
+# aws_common_infrastructure
+resource "github_repository" "aws_common_infrastructure_repository" {
+  name                 = "aws_common_infrastructure"
+  visibility           = "public"
+  vulnerability_alerts = true
+}
+
+resource "github_branch_protection" "aws_common_infrastructure_protection" {
+  repository_id  = github_repository.aws_common_infrastructure_repository.node_id
+  pattern        = "main"
+  enforce_admins = true
+}
+
