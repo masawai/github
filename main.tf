@@ -5,6 +5,14 @@ terraform {
       version = "~> 5.0"
     }
   }
+  cloud {
+    organization = "masawai"
+    hostname     = "app.terraform.io"
+
+    workspaces {
+      name = "github"
+    }
+  }
 }
 
 provider "github" {
@@ -50,8 +58,9 @@ resource "github_branch_protection" "masawai_protection" {
 
 # jumble
 resource "github_repository" "jumble_repository" {
-  name       = "jumble"
-  visibility = "public"
+  name                 = "jumble"
+  visibility           = "public"
+  vulnerability_alerts = true
 }
 
 resource "github_branch_protection" "jumble_protection" {
